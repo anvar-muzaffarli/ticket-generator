@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="author" content="Anvar Khalid">
+<meta name="description" content="İmtahan biletləri generatoru">
+<meta name="theme-color" content="#0f3d3e">
+<title>İmtahan biletləri generatoru</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230f3d3e'/%3E%3Crect x='9' y='7' width='14' height='18' rx='1.5' fill='%23fff'/%3E%3Crect x='12' y='12' width='8' height='2' fill='%23f4b942'/%3E%3Crect x='12' y='16' width='8' height='1.6' fill='%230f3d3e'/%3E%3Crect x='12' y='19.4' width='5' height='1.6' fill='%230f3d3e'/%3E%3C/svg%3E">
+</head>
+<body>
+<div class="app">
+
+<aside class="side controls">
+  <header class="brand">
+    <div class="brand-row">
+      <div class="logo" aria-hidden="true"><span></span><span></span><span></span></div>
+      <div class="langs" id="langs" role="group" aria-label="Language">
+        <button data-lang="az">AZ</button><button data-lang="ru">RU</button><button data-lang="en">EN</button>
+      </div>
+    </div>
+    <h1 data-i18n="title"></h1>
+    <p data-i18n="subtitle"></p>
+    <p class="credit"><span data-i18n="madeBy"></span> <a href="https://www.linkedin.com/in/anvarkhalidofficial/" target="_blank" rel="noopener" data-i18n="authorName"></a></p>
+  </header>
+
+  <section class="sec">
+    <h2><span class="num">1</span><span data-i18n="s1"></span></h2>
+    <div class="drop" id="drop" tabindex="0" role="button">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V4m0 0L8 8m4-4 4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 14v4.5A1.5 1.5 0 0 0 6.5 20h11a1.5 1.5 0 0 0 1.5-1.5V14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      <div><b data-i18n="dropMain"></b> <span data-i18n="dropOr"></span><small data-i18n="dropHint"></small></div>
+      <input type="file" id="file" accept=".docx,.doc" hidden>
+    </div>
+    <details class="fold">
+      <summary data-i18n="pasteSummary"></summary>
+      <textarea id="paste" data-i18n-ph="pastePh"></textarea>
+      <button class="line-btn" id="usePaste" data-i18n="pasteBtn"></button>
+    </details>
+    <div id="fileMsg"></div>
+    <details class="fold" id="qdetails" hidden>
+      <summary data-i18n="seeQs"></summary>
+      <div class="qlist"><ol id="qlist"></ol></div>
+    </details>
+  </section>
+
+  <section class="sec">
+    <h2><span class="num">2</span><span data-i18n="s2"></span></h2>
+    <label for="sector" data-i18n="sector"></label>
+    <select id="sector">
+      <option value="az" data-i18n="sec_az"></option>
+      <option value="ru" data-i18n="sec_ru"></option>
+      <option value="en" data-i18n="sec_en"></option>
+    </select>
+    <div class="pair">
+      <div>
+        <label for="hours" data-i18n="hours"></label>
+        <select id="hours"><option value="45">45</option><option value="60">60</option><option value="75">75</option></select>
+      </div>
+      <div>
+        <label for="students" data-i18n="students"></label>
+        <input type="number" id="students" min="1" max="300" value="25" inputmode="numeric">
+      </div>
+    </div>
+    <label data-i18n="totalByHours"></label>
+    <div class="trio">
+      <div><label for="q45">45</label><input type="number" id="q45" min="5" inputmode="numeric"></div>
+      <div><label for="q60">60</label><input type="number" id="q60" min="5" inputmode="numeric"></div>
+      <div><label for="q75">75</label><input type="number" id="q75" min="5" inputmode="numeric"></div>
+    </div>
+    <p class="hint" data-i18n="totalHint"></p>
+    <div class="tally" id="stamp" aria-live="polite">
+      <div><b id="ticketCount">–</b><span data-i18n="statTickets"></span></div>
+      <div><b>5</b><span data-i18n="statPer"></span></div>
+      <div><b id="useCount">–</b><span data-i18n="statUsed"></span></div>
+    </div>
+    <div id="countMsg"></div>
+  </section>
+
+  <section class="sec">
+    <h2><span class="num">3</span><span data-i18n="s3"></span></h2>
+    <label for="uni" data-i18n="f_uni"></label><input type="text" id="uni">
+    <label for="fac" data-i18n="f_fac"></label><input type="text" id="fac">
+    <label for="dep" data-i18n="f_dep"></label><input type="text" id="dep">
+    <label for="spec" data-i18n="f_spec"></label><input type="text" id="spec">
+    <div class="pair">
+      <div><label for="course" data-i18n="f_course"></label><input type="text" id="course"></div>
+      <div><label for="group" data-i18n="f_group"></label><input type="text" id="group"></div>
+    </div>
+    <label for="subject" data-i18n="f_subject"></label><input type="text" id="subject">
+    <label for="head" data-i18n="f_head"></label><input type="text" id="head">
+    <div class="pair">
+      <div><label for="teacher" data-i18n="f_teacher"></label><input type="text" id="teacher"></div>
+      <div><label for="year" data-i18n="f_year"></label><input type="number" id="year" inputmode="numeric"></div>
+    </div>
+  </section>
+
+  <div class="go">
+    <button class="marker" id="gen" disabled data-i18n="gen"></button>
+    <div id="genMsg"></div>
+  </div>
+</aside>
+
+<main class="board">
+  <div class="board-bar">
+    <div>
+      <h2 id="pvTitle"></h2>
+      <label class="check"><input type="checkbox" id="showNums" checked> <span data-i18n="showNums"></span></label>
+    </div>
+    <div class="out">
+      <button class="out-btn main" id="dl" disabled>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11m0 0-4-4m4 4 4-4M5 19h14" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span data-i18n="dl"></span>
+      </button>
+      <button class="out-btn" id="print" disabled>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 9V4h10v5M7 17H5a1 1 0 0 1-1-1v-6a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1h-2M7 14h10v6H7z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+        <span data-i18n="print"></span>
+      </button>
+    </div>
+  </div>
+  <div class="empty" id="empty">
+    <div class="empty-sheet"><i></i><i></i><i></i><i></i><i></i></div>
+    <p data-i18n="empty"></p>
+  </div>
+  <div class="sheets" id="sheets"></div>
+</main>
+
+</div>
+
+<script type="module" src="/src/main.js"></script>
+</body>
+</html>
